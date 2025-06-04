@@ -1,6 +1,6 @@
-package io.github.libxposed.service;
+package io.github.libinstalld.service;
 
-interface IXposedScopeCallback {
+interface IInstalldScopeCallback {
     oneway void onScopeRequestPrompted(String packageName) = 1;
     oneway void onScopeRequestApproved(String packageName) = 2;
     oneway void onScopeRequestDenied(String packageName) = 3;

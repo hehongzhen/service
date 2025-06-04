@@ -1,7 +1,7 @@
-package io.github.libxposed.service;
-import io.github.libxposed.service.IXposedScopeCallback;
+package io.github.libinstalld.service;
+import io.github.libinstalld.service.IInstalldScopeCallback;
 
-interface IXposedService {
+interface IInstalldService {
     const int API = 100;
 
     const int FRAMEWORK_PRIVILEGE_ROOT = 0;
@@ -9,7 +9,7 @@ interface IXposedService {
     const int FRAMEWORK_PRIVILEGE_APP = 2;
     const int FRAMEWORK_PRIVILEGE_EMBEDDED = 3;
 
-    const String AUTHORITY_SUFFIX = ".XposedService";
+    const String AUTHORITY_SUFFIX = ".InstalldService";
     const String SEND_BINDER = "SendBinder";
 
     // framework details
@@ -21,7 +21,7 @@ interface IXposedService {
 
     // scope utilities
     List<String> getScope() = 10;
-    oneway void requestScope(String packageName, IXposedScopeCallback callback) = 11;
+    oneway void requestScope(String packageName, IInstalldScopeCallback callback) = 11;
     String removeScope(String packageName) = 12;
 
     // remote preference utilities

@@ -1,4 +1,4 @@
-package io.github.libxposed.service;
+package io.github.libinstalld.service;
 
 import android.content.SharedPreferences;
 import android.os.ParcelFileDescriptor;
@@ -14,7 +14,7 @@ import java.util.WeakHashMap;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 @SuppressWarnings("unused")
-public final class XposedService {
+public final class InstalldService {
 
     public final static class ServiceException extends RuntimeException {
         ServiceException(String message) {
@@ -26,7 +26,7 @@ public final class XposedService {
         }
     }
 
-    private final static Map<OnScopeEventListener, IXposedScopeCallback> scopeCallbacks = new WeakHashMap<>();
+    private final static Map<OnScopeEventListener, IInstalldScopeCallback> scopeCallbacks = new WeakHashMap<>();
 
     /**
      * Callback interface for module scope request.
@@ -74,7 +74,7 @@ public final class XposedService {
         }
 
         private IXposedScopeCallback asInterface() {
-            return scopeCallbacks.computeIfAbsent(this, (listener) -> new IXposedScopeCallback.Stub() {
+            return scopeCallbacks.computeIfAbsent(this, (listener) -> new IInstalldScopeCallback.Stub() {
                 @Override
                 public void onScopeRequestPrompted(String packageName) {
                     listener.onScopeRequestPrompted(packageName);
@@ -130,16 +130,16 @@ public final class XposedService {
         FRAMEWORK_PRIVILEGE_EMBEDDED
     }
 
-    private final IXposedService mService;
+    private final IInstalldService mService;
     private final Map<String, RemotePreferences> mRemotePrefs = new HashMap<>();
 
     final ReentrantReadWriteLock deletionLock = new ReentrantReadWriteLock();
 
-    XposedService(IXposedService service) {
+    InstalldService(IInstalldService service) {
         mService = service;
     }
 
-    IXposedService getRaw() {
+    IInstalldService getRaw() {
         return mService;
     }
 
